@@ -1,0 +1,12 @@
+$GetOU = Get-ADOrganizationalUnit -Filter * -SearchBase "OU=SBS_Students,DC=ad,DC=stepsys,DC=org"
+$Finalresult = $getou | ForEach-Object {
+    $totalusers = (Get-ADUser -Filter * -SearchBase $_.DistinguishedName).Count
+    if ($totalusers) {
+        [PsCustomObject]@{
+            OU    = $_.DistinguishedName
+            Users = $totalusers
+        }
+    }
+}
+
+$finalresult | Format-Table -AutoSize
