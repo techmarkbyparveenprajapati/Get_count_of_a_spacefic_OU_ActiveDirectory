@@ -1,4 +1,4 @@
-$GetOU = Get-ADOrganizationalUnit -Filter * -SearchBase "OU=SBS_Students,DC=ad,DC=stepsys,DC=org"
+$GetOU = Get-ADOrganizationalUnit -Filter * -SearchBase "YOUR_OU_PATH_HERE"
 $Finalresult = $getou | ForEach-Object {
     $totalusers = (Get-ADUser -Filter * -SearchBase $_.DistinguishedName).Count
     if ($totalusers) {
